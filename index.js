@@ -70,4 +70,8 @@ app.delete('/books/:id', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
+<<<<<<< HEAD
 app.listen(port, () =>  console.log(`Example app listening at http://localhost:${port}`));
+=======
+app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
+>>>>>>> 69fa8abd48e80b54c64054717a9d04a87a5ab662
