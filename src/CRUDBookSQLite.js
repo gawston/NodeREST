@@ -9,7 +9,7 @@ const sqlite3 = require('sqlite3');
 const app = express();
 
 // connect to db
-const db = new sqlite3.Database('./Database/book.sqlite');
+const db = new sqlite3.Database('./Database/Books.sqlite');
 
 // parse incoming requests
 app.use(express.json());
