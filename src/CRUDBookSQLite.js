@@ -33,7 +33,7 @@ app.get('/books', (req, res) => {
 });
 
 // route to get a book by id
-app.get('/books:id', (req, res) => {
+app.get('/books/:id', (req, res) => {
     db.get('SELECT * FROM books WHERE id = ?', req.params.id, (err, row) => {
         if(err) {
             res.status(500).send(err);
@@ -48,22 +48,24 @@ app.get('/books:id', (req, res) => {
 });
 
 // route to create a new book
-app.get('/books', (req, res) => {
+app.post('/books', (req, res) => {
     const book = req.body;
-    db.run('INSERT INTO books (title, author) VALUES (?, ?)', book.title, book.author, function(err) {
+    db.run('INSERT INTO books (id, title, author) VALUES (?, ?, ?)', book.id, book.title, book.author, function(err) {
         if(err) {
             res.status(500).send(err);
         } else {
-            book.id = this.lastID;
+            if(book.id == null) {
+                book.id = this.lastID;
+            }
             res.send(book);
         }
     });
 });
 
 // route to update a book
-app.get('/books/:id', (req, res) => {
+app.put('/books/:id', (req, res) => {
     const book = req.body;
-    db.run('UPDATE books SET title = ?, author = ?', book.title, book.author, req.params.id, function(err) {
+    db.run('UPDATE books SET title = ?, author = ? WHERE id = ?', book.title, book.author, req.params.id, function(err) {
         if(err) {
             res.status(500).send(err);
         } else {
@@ -73,7 +75,7 @@ app.get('/books/:id', (req, res) => {
 });
 
 // route to delete a book
-app.get('/books/:id', (req, res) => {
+app.delete('/books/:id', (req, res) => {
     db.run('DELETE FROM books WHERE id = ?', req.params.id, function(err) {
         if(err) {
             res.status(500).send(err);
