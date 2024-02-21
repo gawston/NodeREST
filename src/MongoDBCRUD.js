@@ -8,7 +8,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 // Database connection
-mongoose.connect(" ", {
+mongoose.connect(
+    "mongodb://admin:HVQprd86084@node57048-naruenat-noderest.proen.app.ruk-com.cloud", {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 });
@@ -30,7 +31,7 @@ app.post("/books", async (req, res) => {
     try {
         // Get the last book record to deletermine the next ID
         const lastBook = await Book.findOne().sort({ id: -1 });
-        const nextId = lastBook ? lastBook.id + 1 : 1;
+        const nextId = lastBook ? parseInt(lastBook.id) + 1 : 1;
 
         // Create a new book with the next ID
         const book = new Book({
