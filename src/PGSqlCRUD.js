@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // set db url
-const dbUrl = '';
+const dbUrl = 'node57054-naruenat-noderest.proen.app.ruk-com.cloud:11810';
 
 // create a connection to the database
 const sequelize = new Sequelize(dbUrl);

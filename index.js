@@ -10,12 +10,21 @@ const app = express();
 // parse incoming requests
 app.use(express.json());
 
+// setup for PG SQL
+const dbUrl = 'postgres://webadmin:PORadf97627@node57054-naruenat-noderest.proen.app.ruk-com.cloud/Books';
+
 // create a connection to the database
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    storage: './Database/SQBooks.sqlite'
-});
+const sequelize = new Sequelize(dbUrl);
+// end setup
+
+// setup or SQLite
+// create a connection to the database
+// const sequelize = new Sequelize('database', 'username', 'password', {
+//     host: 'localhost',
+//     dialect: 'sqlite',
+//     storage: './Database/SQBooks.sqlite'
+// });
+// end setup
 
 // define the Book model
 const Book = sequelize.define('book', {
